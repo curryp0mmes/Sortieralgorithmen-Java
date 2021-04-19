@@ -14,7 +14,7 @@ public class MergeSort implements Algorithm {
         vergleiche = 0;
         schleifendurchlaeufe = 0;
 
-        char outputArray[] = mergeSort(inputArray, 0, inputArray.length-1);
+        char[] outputArray = mergeSort(inputArray, 0, inputArray.length-1);
 
         return new SortingResult(outputArray, schleifendurchlaeufe, vergleiche, tauschaufwand);
     }
@@ -33,7 +33,7 @@ public class MergeSort implements Algorithm {
 
 
     private char[] merge(char[] arr, int from, int middle, int end) {
-        char output[] = arr.clone();
+        char[] output = arr.clone();
 
         int pos = from;
         int posL = from;
@@ -44,14 +44,13 @@ public class MergeSort implements Algorithm {
                 output[pos] = arr[posL];
                 tauschaufwand++;
                 posL++;
-                pos++;
             }
             else{
                 output[pos] = arr[posR];
                 tauschaufwand++;
                 posR++;
-                pos++;
             }
+            pos++;
             vergleiche++;
         }
         for(int i = posL; i < middle; i++) {

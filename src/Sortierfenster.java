@@ -4,8 +4,6 @@ import com.curryp0mmes.sortingalgorithms.algorithms.template.SortingResult;
 
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Sortierfenster extends JFrame{
     private JPanel mainPanel;
@@ -22,8 +20,8 @@ public class Sortierfenster extends JFrame{
 
 
     public Sortierfenster(String title) {
-        /**
-         * Layout-Kleinigkeiten
+        /*
+          Layout-Kleinigkeiten
          */
         this.setTitle(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,41 +44,14 @@ public class Sortierfenster extends JFrame{
         columnModel.getColumn(5).setPreferredWidth(250);
         this.setContentPane(mainPanel);
         this.pack();
-        /**
-         * ENDE Layout-Kleinigkeiten
+        //ENDE Layout-Kleinigkeiten
+        /*
+          ActionListener für die drei Buttons
          */
-
-        //generiere ein neues Objekt der Klasse Sorter, in der die Sortieralgos implementiert sein sollen
-        //sorter = new Sortierer();
-
-
-        /**
-         * ActionListener für die drei Buttons
-         */
-        bubbleButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                callbackButton(0, new BubbleSort());
-            }
-        });
-        insertionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                callbackButton(1, new InsertionSort());
-            }
-        });
-        selectionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                callbackButton(2, new SelectionSort());
-            }
-        });
-        mergeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                callbackButton(3, new MergeSort());
-            }
-        });
+        bubbleButton.addActionListener(e -> callbackButton(0, new BubbleSort()));
+        insertionButton.addActionListener(e -> callbackButton(1, new InsertionSort()));
+        selectionButton.addActionListener(e -> callbackButton(2, new SelectionSort()));
+        mergeButton.addActionListener(e -> callbackButton(3, new MergeSort()));
     }
 
     public static void main (String[] args){

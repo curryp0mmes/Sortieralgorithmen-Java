@@ -9,10 +9,6 @@ public class SortingResult {
         this.array = outputArray;
     }
 
-    SortingResult(char[] outputArray) {
-        this.array = outputArray;
-    }
-
     public int getSchleifendurchlaeufe() {
         return schleifendurchlaeufe;
     }
@@ -29,8 +25,8 @@ public class SortingResult {
         return array;
     }
 
-    int schleifendurchlaeufe = 0;
-    int vergleiche = 0;
-    int tauschaufwand = 0;
-    char[] array = null;
+    int schleifendurchlaeufe;
+    int vergleiche;
+    int tauschaufwand;
+    char[] array;
 }
