@@ -1,4 +1,4 @@
-package com.curryp0mmes.sortingalgorithms;
+import com.curryp0mmes.sortingalgorithms.algorithms.*;
 
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;
@@ -15,7 +15,6 @@ public class Sortierfenster extends JFrame{
     private JButton selectionButton;
 
 
-    Sortierer sorter;
     char[] eingabe;
     char[] ausgabe;
 
@@ -54,7 +53,7 @@ public class Sortierfenster extends JFrame{
          */
 
         //generiere ein neues Objekt der Klasse Sorter, in der die Sortieralgos implementiert sein sollen
-        sorter = new Sortierer();
+        //sorter = new Sortierer();
 
 
         /**
@@ -98,15 +97,18 @@ public class Sortierfenster extends JFrame{
         String a = new String(eingabe);
         jTable1.setValueAt(a, 0, 0);
 
-        ausgabe = sorter.bubblesort(eingabe);
+        Algorithm sorter = new BubbleSort();
+
+        SortingResult result = sorter.sort(eingabe);
+        ausgabe = result.getArray();
 
         String b = new String(ausgabe); //konvertiert charArray zum String zurück
         System.out.println(ausgabe);
         jTable1.setValueAt(b, 0, 1);
 
-        jTable1.setValueAt(sorter.getAufwand1(), 0, 2);
-        jTable1.setValueAt(sorter.getAufwand2(), 0, 3);
-        jTable1.setValueAt(sorter.getTauschaufwand(), 0, 4);
+        jTable1.setValueAt(result.getSchleifendurchläufe(), 0, 2);
+        jTable1.setValueAt(result.getVergleiche(), 0, 3);
+        jTable1.setValueAt(result.getTauschaufwand(), 0, 4);
         jTable1.setValueAt(a.length(), 0, 5);
     }
 
@@ -116,15 +118,18 @@ public class Sortierfenster extends JFrame{
         String a = new String(eingabe);
         jTable1.setValueAt(a, 1, 0);
 
-        ausgabe = sorter.insertionsort(eingabe);
+        Algorithm sorter = new InsertionSort();
+
+        SortingResult result = sorter.sort(eingabe);
+        ausgabe = result.getArray();
 
         String b = new String(ausgabe); //konvertiert charArray zum String zurück
         System.out.println(ausgabe);
         jTable1.setValueAt(b, 1, 1);
 
-        jTable1.setValueAt(sorter.getAufwand1(), 1, 2);
-        jTable1.setValueAt(sorter.getAufwand2(), 1, 3);
-        jTable1.setValueAt(sorter.getTauschaufwand(), 1, 4);
+        jTable1.setValueAt(result.getSchleifendurchläufe(), 1, 2);
+        jTable1.setValueAt(result.getVergleiche(), 1, 3);
+        jTable1.setValueAt(result.getTauschaufwand(), 1, 4);
         jTable1.setValueAt(a.length(), 1, 5);
     }
 
@@ -134,15 +139,18 @@ public class Sortierfenster extends JFrame{
         String a = new String(eingabe);
         jTable1.setValueAt(a, 2, 0);
 
-        ausgabe = sorter.selectionsort(eingabe);
+        Algorithm sorter = new SelectionSort();
+
+        SortingResult result = sorter.sort(eingabe);
+        ausgabe = result.getArray();
 
         String b = new String(ausgabe); //konvertiert charArray zum String zurück
         System.out.println(ausgabe);
         jTable1.setValueAt(b, 2, 1);
 
-        jTable1.setValueAt(sorter.getAufwand1(), 2, 2);
-        jTable1.setValueAt(sorter.getAufwand2(), 2, 3);
-        jTable1.setValueAt(sorter.getTauschaufwand(), 2, 4);
+        jTable1.setValueAt(result.getSchleifendurchläufe(), 2, 2);
+        jTable1.setValueAt(result.getVergleiche(), 2, 3);
+        jTable1.setValueAt(result.getTauschaufwand(), 2, 4);
         jTable1.setValueAt(a.length(), 2, 5);
     }
 }
