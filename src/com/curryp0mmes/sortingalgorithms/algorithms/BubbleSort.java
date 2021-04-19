@@ -1,30 +1,31 @@
 package com.curryp0mmes.sortingalgorithms.algorithms;
 
 public class BubbleSort implements Algorithm {
-
-
     @Override
     public SortingResult sort(char[] inputArray) {
         char outputArray[] = inputArray;
+        int tauschaufwand = 0;
+        int vergleiche = 0;
+        int schleifendurchlaeufe = 0;
 
-
-        for(int pos = 0; pos < inputArray.length; pos++) {
-            for(int i = pos + 1; i <= inputArray.length; i++) {
-                compare(a,b);
-
+        for(int laenge = inputArray.length; laenge > 0; laenge--) {
+            boolean swapped = false;
+            for(int i = 0; i < laenge - 1; i++) {
+                schleifendurchlaeufe++;
+                vergleiche++;
+                if(inputArray[i] > inputArray[i+1])
+                {
+                    char uebertrag = inputArray[i];
+                    inputArray[i] = inputArray[i+1];
+                    inputArray[i+1] = uebertrag;
+                    swapped = true;
+                    tauschaufwand++;
+                }
             }
-            if(kleinster != pos) {
-                char uebertrag = outputArray[kleinster];
-                outputArray[kleinster] = outputArray[pos];
-                outputArray[pos] = uebertrag;
+            if(!swapped) {
+                break;
             }
-
         }
-
-
-
-
-
-        return new SortingResult(outputArray, 0, 0, 0);
+        return new SortingResult(outputArray, schleifendurchlaeufe, vergleiche, tauschaufwand);
     }
 }

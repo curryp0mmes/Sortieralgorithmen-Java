@@ -1,27 +1,26 @@
 package com.curryp0mmes.sortingalgorithms.algorithms;
 
 public class InsertionSort implements Algorithm {
-
-
     @Override
     public SortingResult sort(char[] inputArray) {
         char outputArray[] = inputArray;
+        int tauschaufwand = 0;
+        int vergleiche = 0;
+        int schleifendurchlaeufe = 0;
 
-
-        for(int pos = 0; pos < inputArray.length; pos++) {
-            int kleinster = pos;
-            for(int i = pos + 1; i <= inputArray.length; i++) {
-                if(outputArray[i] < outputArray[kleinster]) kleinster = i;
+        for(int pos = 1; pos < inputArray.length; pos++) {
+            for(int i = pos; i > 0; i--) {
+                vergleiche++;
+                schleifendurchlaeufe++;
+                if(inputArray[i-1] > inputArray[i])
+                {
+                    char uebertrag = inputArray[i];
+                    inputArray[i] = inputArray[i-1];
+                    inputArray[i-1] = uebertrag;
+                    tauschaufwand++;
+                }
             }
-            if(kleinster != pos) {
-                char uebertrag = outputArray[kleinster];
-                outputArray[kleinster] = outputArray[pos];
-                outputArray[pos] = uebertrag;
-            }
-
         }
-
-
-        return new SortingResult(outputArray, 0, 0, 0);
+        return new SortingResult(outputArray, schleifendurchlaeufe, vergleiche, tauschaufwand);
     }
 }
