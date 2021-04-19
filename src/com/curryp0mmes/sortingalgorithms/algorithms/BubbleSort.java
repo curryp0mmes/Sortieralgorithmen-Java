@@ -9,9 +9,9 @@ public class BubbleSort implements Algorithm {
 
 
         for(int pos = 0; pos < inputArray.length; pos++) {
-            int kleinster = pos;
             for(int i = pos + 1; i <= inputArray.length; i++) {
-                if(outputArray[i] < outputArray[kleinster]) kleinster = i;
+                compare(a,b);
+
             }
             if(kleinster != pos) {
                 char uebertrag = outputArray[kleinster];
