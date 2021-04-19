@@ -1,4 +1,6 @@
 import com.curryp0mmes.sortingalgorithms.algorithms.*;
+import com.curryp0mmes.sortingalgorithms.algorithms.template.Algorithm;
+import com.curryp0mmes.sortingalgorithms.algorithms.template.SortingResult;
 
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;
@@ -9,10 +11,10 @@ public class Sortierfenster extends JFrame{
     private JPanel mainPanel;
     private JComboBox jComboBox1;
     private JTable jTable1;
-    private JScrollPane jScrollPane1;
     private JButton bubbleButton;
     private JButton insertionButton;
     private JButton selectionButton;
+    private JButton mergeButton;
 
 
     char[] eingabe;
@@ -27,16 +29,12 @@ public class Sortierfenster extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null}
-                },
+                new Object [4][6],
                 new String [] {
                         "Eingabe", "Ausgabe", "Aufwand 1 (...)", "Aufwand 2 (...)", "Tauschaufwand", "Eingabelänge"
                 }
         ));
-        jScrollPane1.setViewportView(jTable1);
+
         //passe einzelne Spaltenbreiten an
         TableColumnModel columnModel = jTable1.getColumnModel();
 
@@ -62,19 +60,25 @@ public class Sortierfenster extends JFrame{
         bubbleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                bubbleAction();
+                callbackButton(0, new BubbleSort());
             }
         });
         insertionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                insertionAction();
+                callbackButton(1, new InsertionSort());
             }
         });
         selectionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                selectionAction();
+                callbackButton(2, new SelectionSort());
+            }
+        });
+        mergeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                callbackButton(3, new MergeSort());
             }
         });
     }
@@ -84,73 +88,23 @@ public class Sortierfenster extends JFrame{
         meinFrame.setVisible(true);
     }
 
-    /**
-     * Liest die Eingabe ein, gibt sie in die Tabelle und
-     * sortiert sie anschließend im Sortierer sorter mit der zugehörigen Methode.
-     * Dort wird auch der jeweilige Aufwand gezählt.
-     * Anschließend wird die zurückgegebene sortierte Eingabe als Ausgabe
-     * zusammen mit dem Aufwand in der Tabelle ergänzt.
-     */
-    public void bubbleAction(){
+    public void callbackButton(int row, Algorithm sortieralgorithmus) {
         eingabe = jComboBox1.getSelectedItem().toString().toCharArray();
 
         String a = new String(eingabe);
-        jTable1.setValueAt(a, 0, 0);
+        jTable1.setValueAt(a, row, 0);
 
-        Algorithm sorter = new BubbleSort();
-
-        SortingResult result = sorter.sort(eingabe);
+        SortingResult result = sortieralgorithmus.sort(eingabe);
         ausgabe = result.getArray();
 
         String b = new String(ausgabe); //konvertiert charArray zum String zurück
         System.out.println(ausgabe);
-        jTable1.setValueAt(b, 0, 1);
+        jTable1.setValueAt(b, row, 1);
 
-        jTable1.setValueAt(result.getSchleifendurchläufe(), 0, 2);
-        jTable1.setValueAt(result.getVergleiche(), 0, 3);
-        jTable1.setValueAt(result.getTauschaufwand(), 0, 4);
-        jTable1.setValueAt(a.length(), 0, 5);
+        jTable1.setValueAt(result.getSchleifendurchlaeufe(), row, 2);
+        jTable1.setValueAt(result.getVergleiche(), row, 3);
+        jTable1.setValueAt(result.getTauschaufwand(), row, 4);
+        jTable1.setValueAt(a.length(), row, 5);
     }
 
-    public void insertionAction(){
-        eingabe = jComboBox1.getSelectedItem().toString().toCharArray();
-
-        String a = new String(eingabe);
-        jTable1.setValueAt(a, 1, 0);
-
-        Algorithm sorter = new InsertionSort();
-
-        SortingResult result = sorter.sort(eingabe);
-        ausgabe = result.getArray();
-
-        String b = new String(ausgabe); //konvertiert charArray zum String zurück
-        System.out.println(ausgabe);
-        jTable1.setValueAt(b, 1, 1);
-
-        jTable1.setValueAt(result.getSchleifendurchläufe(), 1, 2);
-        jTable1.setValueAt(result.getVergleiche(), 1, 3);
-        jTable1.setValueAt(result.getTauschaufwand(), 1, 4);
-        jTable1.setValueAt(a.length(), 1, 5);
-    }
-
-    public void selectionAction(){
-        eingabe = jComboBox1.getSelectedItem().toString().toCharArray();
-
-        String a = new String(eingabe);
-        jTable1.setValueAt(a, 2, 0);
-
-        Algorithm sorter = new SelectionSort();
-
-        SortingResult result = sorter.sort(eingabe);
-        ausgabe = result.getArray();
-
-        String b = new String(ausgabe); //konvertiert charArray zum String zurück
-        System.out.println(ausgabe);
-        jTable1.setValueAt(b, 2, 1);
-
-        jTable1.setValueAt(result.getSchleifendurchläufe(), 2, 2);
-        jTable1.setValueAt(result.getVergleiche(), 2, 3);
-        jTable1.setValueAt(result.getTauschaufwand(), 2, 4);
-        jTable1.setValueAt(a.length(), 2, 5);
-    }
 }

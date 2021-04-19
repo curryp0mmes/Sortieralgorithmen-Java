@@ -1,9 +1,9 @@
-package com.curryp0mmes.sortingalgorithms.algorithms;
+package com.curryp0mmes.sortingalgorithms.algorithms.template;
 
 public class SortingResult {
 
-    SortingResult(char[] outputArray, int schleifendurchläufe, int vergleiche, int tauschaufwand) {
-        this.schleifendurchläufe = schleifendurchläufe;
+    public SortingResult(char[] outputArray, int schleifendurchlaeufe, int vergleiche, int tauschaufwand) {
+        this.schleifendurchlaeufe = schleifendurchlaeufe;
         this.vergleiche = vergleiche;
         this.tauschaufwand = tauschaufwand;
         this.array = outputArray;
@@ -13,8 +13,8 @@ public class SortingResult {
         this.array = outputArray;
     }
 
-    public int getSchleifendurchläufe() {
-        return schleifendurchläufe;
+    public int getSchleifendurchlaeufe() {
+        return schleifendurchlaeufe;
     }
 
     public int getVergleiche() {
@@ -29,7 +29,7 @@ public class SortingResult {
         return array;
     }
 
-    int schleifendurchläufe = 0;
+    int schleifendurchlaeufe = 0;
     int vergleiche = 0;
     int tauschaufwand = 0;
     char[] array = null;

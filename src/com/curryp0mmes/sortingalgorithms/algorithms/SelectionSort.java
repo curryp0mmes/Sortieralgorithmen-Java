@@ -1,5 +1,8 @@
 package com.curryp0mmes.sortingalgorithms.algorithms;
 
+import com.curryp0mmes.sortingalgorithms.algorithms.template.Algorithm;
+import com.curryp0mmes.sortingalgorithms.algorithms.template.SortingResult;
+
 public class SelectionSort implements Algorithm {
     @Override
     public SortingResult sort(char[] inputArray) {
