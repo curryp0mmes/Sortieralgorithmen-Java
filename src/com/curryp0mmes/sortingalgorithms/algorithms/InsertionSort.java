@@ -6,7 +6,6 @@ import com.curryp0mmes.sortingalgorithms.algorithms.template.SortingResult;
 public class InsertionSort implements Algorithm {
     @Override
     public SortingResult sort(char[] inputArray) {
-        char outputArray[] = inputArray;
         int tauschaufwand = 0;
         int vergleiche = 0;
         int schleifendurchlaeufe = 0;
@@ -24,6 +23,6 @@ public class InsertionSort implements Algorithm {
                 }
             }
         }
-        return new SortingResult(outputArray, schleifendurchlaeufe, vergleiche, tauschaufwand);
+        return new SortingResult(inputArray, schleifendurchlaeufe, vergleiche, tauschaufwand);
     }
 }
