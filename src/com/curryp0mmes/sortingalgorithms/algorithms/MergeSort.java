@@ -43,24 +43,35 @@ public class MergeSort implements Algorithm {
         return arr;
     }
 
+    /**
+     *
+     * Ein Tauschaufwand entspricht, wenn nicht einfach nur das linke array und dann das rechte abgelesen wird.
+     * Wenn sich also aus dem rechten Array bedient wird, bevor das linke leer ist, zählt es als tauschaufwand.
+     *
+     * @param arrL
+     * @param arrR
+     * @return  merged Array
+     */
+
     private char[] merge(char[] arrL, char[] arrR) {
         char[] output = new char[arrL.length + arrR.length];
-
         int pos = 0;
         int posL = 0;
         int posR = 0;
-        while(posL < arrL.length && posR < arrR.length) {
-            if(arrL[posL] < arrR[posR]) {
+        while(posL < arrL.length && posR < arrR.length) {   //2 vergleiche + 1 Schleifendurchlauf
+            vergleiche+=2;
+            schleifendurchlaeufe++;
+            if(arrL[posL] < arrR[posR]) {   //1 vergleich
                 output[pos] = arrL[posL];
                 posL++;
             }
             else{
-                output[pos] = arrR[posR];
+                output[pos] = arrR[posR];   //1 "tausch", da hier aus dem rechten bedient wird
                 posR++;
+                tauschaufwand++;
             }
-            pos++;
-            tauschaufwand++;
             vergleiche++;
+            pos++;
         }
         for(int i = posL; i < arrL.length; i++) {
             output[pos] = arrL[i];

@@ -1,6 +1,5 @@
 import com.curryp0mmes.sortingalgorithms.algorithms.*;
-import com.curryp0mmes.sortingalgorithms.algorithms.template.Algorithm;
-import com.curryp0mmes.sortingalgorithms.algorithms.template.SortingResult;
+import com.curryp0mmes.sortingalgorithms.algorithms.template.*;
 
 import javax.swing.*;
 import javax.swing.table.TableColumnModel;
@@ -13,11 +12,6 @@ public class Sortierfenster extends JFrame{
     private JButton insertionButton;
     private JButton selectionButton;
     private JButton mergeButton;
-
-
-    char[] eingabe;
-    char[] ausgabe;
-
 
     public Sortierfenster(String title) {
         /*
@@ -60,22 +54,20 @@ public class Sortierfenster extends JFrame{
     }
 
     public void callbackButton(int row, Algorithm sortieralgorithmus) {
-        eingabe = jComboBox1.getSelectedItem().toString().toCharArray();
+        String eingabe = jComboBox1.getSelectedItem().toString();
 
-        String a = new String(eingabe);
-        jTable1.setValueAt(a, row, 0);
+        jTable1.setValueAt(eingabe, row, 0);
 
-        SortingResult result = sortieralgorithmus.sort(eingabe);
-        ausgabe = result.getArray();
+        SortingResult result = sortieralgorithmus.sort(eingabe.toCharArray());
+        char[] ausgabe = result.getArray();
 
-        String b = new String(ausgabe); //konvertiert charArray zum String zurück
+        String ausgabeString = new String(ausgabe); //konvertiert charArray zum String zurück
         System.out.println(ausgabe);
-        jTable1.setValueAt(b, row, 1);
-
-        jTable1.setValueAt(result.getSchleifendurchlaeufe(), row, 2);
-        jTable1.setValueAt(result.getVergleiche(), row, 3);
-        jTable1.setValueAt(result.getTauschaufwand(), row, 4);
-        jTable1.setValueAt(a.length(), row, 5);
+        jTable1.setValueAt( ausgabeString,                    row, 1);
+        jTable1.setValueAt( result.getSchleifendurchlaeufe(), row, 2);
+        jTable1.setValueAt( result.getVergleiche(),           row, 3);
+        jTable1.setValueAt( result.getTauschaufwand(),        row, 4);
+        jTable1.setValueAt( eingabe.length(),                 row, 5);
     }
 
 }
